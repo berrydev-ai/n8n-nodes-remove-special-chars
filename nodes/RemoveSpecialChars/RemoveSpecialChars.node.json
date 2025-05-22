@@ -1,0 +1,20 @@
+{
+	"node": "n8n-nodes-base.removeSpecialChars",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Text"
+	],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.n8n.io/integrations/creating-nodes/"
+			}
+		]
+	},
+	"subcategories": {
+		"Text": [
+			"Utilities"
+		]
+	}
+}

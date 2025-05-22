@@ -1,19 +1,23 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-remove-special-chars",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n node to remove watermarks and special characters from text or JSON data",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "watermark",
+    "special characters",
+    "text cleaning",
+    "ai text"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/berrydev/n8n-nodes-remove-special-chars",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "BerryDev",
+    "email": "contact@berrydev.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/berrydev/n8n-nodes-remove-special-chars.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -22,23 +26,19 @@
   "scripts": {
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
-    "format": "prettier nodes credentials --write",
-    "lint": "eslint nodes credentials package.json",
-    "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "npm build && npm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "format": "prettier nodes --write",
+    "lint": "eslint nodes package.json",
+    "lintfix": "eslint nodes package.json --fix",
+    "prepublishOnly": "npm build && npm lint -c .eslintrc.prepublish.js nodes package.json"
   },
   "files": [
     "dist"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
-    "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
-    ],
+    "credentials": [],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/RemoveSpecialChars/RemoveSpecialChars.node.js"
     ]
   },
   "devDependencies": {

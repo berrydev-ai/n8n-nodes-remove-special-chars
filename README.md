@@ -1,46 +1,88 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-remove-special-chars
 
-# n8n-nodes-starter
+This package provides an n8n node for removing watermarks and special characters from text or JSON data. This is particularly useful when working with AI-generated content that may contain invisible watermarks (like those in OpenAI responses).
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+## Features
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+The Remove Special Characters node provides three cleaning strategies:
 
-## Prerequisites
+1. **Standard Clean**: Removes invisible/zero-width characters while preserving most text formatting
+2. **Aggressive Clean**: Removes all non-alphanumeric characters (letters, numbers, spaces only)
+3. **Smart Clean**: Targets common watermark patterns while preserving legitimate formatting
 
-You need the following installed on your development machine:
+### Configuration Options
 
-* [git](https://git-scm.com/downloads)
-* Node.js and pnpm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+- **Mode**: Choose between Standard, Aggressive, or Smart cleaning
+- **Input Field**: The field containing the text to clean
+- **Output Field**: The field to store the cleaned text
+- **Process JSON Objects**: Recursively process all string fields in JSON objects
+- **Advanced Options** (Standard mode only):
+  - Keep Punctuation
+  - Keep Numbers
+  - Keep Accented Characters
+  - Custom Characters to Preserve
 
-## Using this starter
+## Installation
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+Follow these steps to install this custom node:
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
+```bash
+# Install n8n if you haven't already
+npm install n8n -g
+
+# Install the custom node
+npm install n8n-nodes-remove-special-chars
+
+# Start n8n with the custom node
+n8n start
+```
+
+## Usage
+
+1. Add the "Remove Special Characters" node to your workflow
+2. Configure the node:
+   - Select the cleaning mode (Standard, Aggressive, or Smart)
+   - Specify the input field containing text to clean
+   - Specify the output field for the cleaned text
+   - Adjust advanced options as needed
+3. Connect the node to your workflow
+
+## Character Types Removed
+
+Depending on the cleaning mode, the node can remove:
+
+- Zero-width characters (U+200B to U+200D, U+FEFF)
+- Soft hyphens, combining marks (U+00AD, U+034F)
+- Direction formatting characters (U+061C, U+2066-U+2069)
+- Other invisible formatting characters
+- Unusual Unicode character sequences often used in watermarks
+
+## Development
+
+If you want to contribute or modify this node:
+
+1. Clone the repository
    ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
+   git clone https://github.com/berrydev/n8n-nodes-remove-special-chars.git
    ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm lint` to check for errors or `npm lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
 
-## More information
+2. Install dependencies
+   ```
+   npm install
+   ```
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+3. Build the code
+   ```
+   npm run build
+   ```
+
+4. Link to n8n
+   ```
+   npm link
+   cd ~/.n8n
+   npm link n8n-nodes-remove-special-chars
+   ```
 
 ## License
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+[MIT](LICENSE.md)
